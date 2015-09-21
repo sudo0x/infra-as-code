@@ -1,5 +1,10 @@
 #!/usr/bin/env python
-def services():
+import boto
+import boto.ec2
+import boto.vpc
+import launch
+import stop
+def connect_region():
     print "enter a region to connect to"
     regions = (
         'ap-northeast-1',
@@ -13,28 +18,28 @@ def services():
         'us-west-2' )
     for i in regions:
         print i
-    region_input = raw_input()
+    vpc_region_input = raw_input()
     print "connecting..."
-    if region_input in regions:
-        ec2 = boto.ec2.connect_to_region(region_input)
-        print "you've successfully landed in" + region_input
+    if vpc_region_input in regions:
+        vpc_region = boto.vpc.connect_to_region(vpc_region_input)
+        print "you've successfully landed in" + vpc_region_input
     else:
         print "Invalid region. Try again."
-        ec2_fun()
+        connect_region()
     print "What to do..type any one of the following"
-    ec2_services = (
+    vpc_services = (
             'Launch Instance',
             'Stop Instance')
-    for j in ec2_services:
+    for j in vpc_services:
         print j
-    ec2_service_input = raw_input()
+    vpc_service_input = raw_input()
     while True:
-        if ec2_service_input in ec2_services[0]:
-            ec2_launch()
+        if vpc_service_input in vpc_services[0]:
+            launch(vpc_region)
             break
-        elif ec2_service_input in ec2_services[1]:
-            ec2_stop()
+        elif vpc_service_input in vpc_services[1]:
+            stop()
             break
         else:
             print "wrong input, try again."
-            ec2_service_input=raw_input()
+            vpc_service_input=raw_input()
