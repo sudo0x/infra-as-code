@@ -1,2 +1,2 @@
 # infra-as-code
-Manage AWS using CLI
+Manage AWS with ease
