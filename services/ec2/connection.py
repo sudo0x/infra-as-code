@@ -3,9 +3,7 @@ import boto
 import boto.ec2
 import boto.vpc
 import launch
-import stop
 def connect_region():
-    print "enter a region to connect to"
     regions = (
         'ap-northeast-1',
         'ap-southeast-1',
@@ -16,30 +14,32 @@ def connect_region():
         'us-east-1',
         'us-west-1',
         'us-west-2' )
-    for i in regions:
-        print i
-    vpc_region_input = raw_input()
+    for i,j in enumerate(regions):
+        print `i+1`+'.'+j
+    vpc_region_input = int(raw_input("[enter a region to connect to]:"))
     print "connecting..."
-    if vpc_region_input in regions:
-        vpc_region = boto.vpc.connect_to_region(vpc_region_input)
-        print "you've successfully landed in" + vpc_region_input
-    else:
-        print "Invalid region. Try again."
-        connect_region()
-    print "What to do..type any one of the following"
-    vpc_services = (
-            'Launch Instance',
-            'Stop Instance')
-    for j in vpc_services:
-        print j
-    vpc_service_input = raw_input()
-    while True:
-        if vpc_service_input in vpc_services[0]:
-            launch(vpc_region)
+    for i,j in enumerate(regions):
+        if i+1 == vpc_region_input:
+            selected_vpc_region = j
             break
-        elif vpc_service_input in vpc_services[1]:
-            stop()
+        #else:
+        #    print "wrong input, try again"
+        #    connect_region()
+
+    vpc_region = boto.vpc.connect_to_region(selected_vpc_region)
+    print "you have successfully landed in " + selected_vpc_region
+
+    vpc_services = {
+            'Launch Instance': launch.run
+            #'Stop Instance': stop
+            }
+    for i,j in enumerate(vpc_services):
+        print `i+1`+'.'+j
+    vpc_service_input = int(raw_input("[type any one of the above services]:"))
+
+    for i,j in enumerate(vpc_services):
+        if i+1 == vpc_service_input:
+            vpc_services[j](selected_vpc_region)
             break
         else:
-            print "wrong input, try again."
-            vpc_service_input=raw_input()
+            print "wrong input"

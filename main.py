@@ -1,16 +1,14 @@
 #!/usr/bin/env python
 from services.ec2 import connection
 print "service intializing...\ntype in any service of the following:"
-aws_services=('ec2','s3', 'vpc')
-for i in aws_services:
-    print i
-user_input()
-def user_input():
-    service_input=raw_input()
-    if service_input is 'ec2':
-        connection.connect_region()
-    elif service_input is 's3':
-        s3_fun()
+aws_services={'ec2': connection.connect_region }
+
+for i,j in enumerate(aws_services):
+    print `i+1`+'.'+j
+aws_service_input = int(raw_input())
+for i,j in enumerate(aws_services):
+    if i+1 == aws_service_input:
+        aws_services[j]()
+        break
     else:
-        print "don't just fool around! Enter a valid service"
-        user_input()
+        print "do nothing"
