@@ -42,4 +42,4 @@ def connect_region():
             vpc_services[j](selected_vpc_region)
             break
         else:
-            print "wrong input"
+            print "wrong input bad input"
