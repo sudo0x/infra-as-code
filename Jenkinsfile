@@ -1,5 +1,5 @@
 node {
     stage('Test') {
-      echo 'printenv'
+      sh 'printenv'
     }
 }
