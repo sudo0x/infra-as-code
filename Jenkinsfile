@@ -1,5 +1,5 @@
 node {
     stage('Test') {
-      echo 'ran'
+      echo 'printenv'
     }
 }
