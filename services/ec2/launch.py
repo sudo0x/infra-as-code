@@ -21,7 +21,8 @@ def run(*args):
 
 #instance selection
     instance_types = (
-                      't2.micro' )
+                      't2.micro',
+                      't2.small' )
     for n,inst in enumerate(instance_types):
         print `n+1`+'.'+inst
     instance_input = int(raw_input("select any one instance type\n"))
