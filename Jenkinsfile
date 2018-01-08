@@ -1,6 +1,6 @@
 node {
     stage('Test') {
       checkout scm
-      echo "In Branch ${env.BRANCH_NAME}"
+      echo "Branch name is ${env.BRANCH_NAME}"
     }
 }
