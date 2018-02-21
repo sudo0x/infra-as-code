@@ -1,7 +1,8 @@
 node {
     stage('Test') {
       checkout scm
-      sh "printenv"
-      echo "hello"
+      docker.image('stridesdk:PR-88').inside('-u root') {
+        sh "ls /usr/src/app"
+      }
     }
 }
