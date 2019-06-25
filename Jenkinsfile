@@ -9,6 +9,8 @@ node {
       }
     }
     stage('Push Image to Registry') { 
+      docker.withRegistry('http://strideai.azurecr.io','stride-docker-cr') {
         platformImage.push()
-    }
+      }
+  }
 }
