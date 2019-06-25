@@ -3,7 +3,7 @@ node {
       checkout scm
     }
     stage('Build Image') {
-      docker.withRegistry('strideai.azurecr.io','stride-docker-cr') {
+      docker.withRegistry('http://strideai.azurecr.io','stride-docker-cr') {
           def platformImage = docker.build("strideai.azurecr.io/test-image:${env.TAG_NAME}")
       }
     }
