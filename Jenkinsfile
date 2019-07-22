@@ -2,6 +2,9 @@ def platformImage
 node {
     stage('Checkout Code') {
       checkout scm
+      sh 'ls'
+      sh 'git@github.com:premsompura/premsompura.github.io.git'
+      sh 'ls'
     }
     stage('Build Image') {
       docker.withRegistry('http://strideai.azurecr.io','stride-docker-cr') {
