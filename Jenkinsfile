@@ -3,6 +3,10 @@ node {
     stage('Checkout Code') {
       checkout scm
     }
+    stage('Encrypt Code') {
+      sh 'pipenv --python 3.6'
+      sh 'pipenv install nuitka'
+    }
     stage('Compile Code') {
       sh 'pipenv --python 2.7'
       sh 'pipenv install nuitka'
