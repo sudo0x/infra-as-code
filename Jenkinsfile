@@ -4,7 +4,7 @@ node {
       checkout scm
     }
     stage('Encrypt Code') {
-      sh 'tox'
+      sh 'tox python nuitka_compile.py -- --paths ['.'] --skip_files [nuitka_compile.py, Jenkinsfile] --skip_folder [] --pattern []'
     }
     stage('Build Image') {
       docker.withRegistry('http://strideai.azurecr.io','stride-docker-cr') {
