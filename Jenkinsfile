@@ -8,7 +8,7 @@ node {
     }
     stage('Pull Base Image') {
        docker.withRegistry('http://strideai.azurecr.io','stride-docker-cr') {
-          docker.pull("strideai.azurecr.io/nlp-engine:latest")
+          docker.image("strideai.azurecr.io/nlp-engine:latest").pull()
        }
     }
     stage('Build Image') {
